@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TodoService } from './services/todo.service';
-import { TodoController } from './controllers/todo.controller';
+import { TodoServiceImpl } from './services/todo.service';
+import { TodoControllerImpl } from './controllers/todo.controller';
 
 @Module({
-    providers: [TodoService],
-    controllers: [TodoController],
-    exports: [TodoService],
+    providers: [TodoServiceImpl],
+    controllers: [TodoControllerImpl],
+    exports: [TodoServiceImpl],
 })
 export class TodoModule { }

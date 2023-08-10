@@ -10,10 +10,3 @@ export class AuthLoginModel {
     @ApiProperty({ type: String })
     password: string;
 }
-
-// {
-//     "id": 1,
-//     "name": "William Franco",
-//     "email": "william@gmail.com",
-//     "password": "flutter"
-// }

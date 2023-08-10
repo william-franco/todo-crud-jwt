@@ -19,14 +19,14 @@ import {
 } from '@nestjs/swagger';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { TodoService } from '../services/todo.service';
 import { TodoModel } from '../models/todo.model';
+import { TodoServiceImpl } from '../services/todo.service';
 
 @Controller('api/todos')
-@ApiTags('doc/todos')
+@ApiTags('todos')
 @UseFilters(HttpExceptionFilter)
-export class TodoController {
-    constructor(private readonly todoService: TodoService) { }
+export class TodoControllerImpl {
+    constructor(private readonly todoService: TodoServiceImpl) { }
 
     @UseGuards(AuthGuard)
     @Get()

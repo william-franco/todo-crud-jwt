@@ -12,11 +12,3 @@ export class TodoModel {
     @ApiProperty({ type: Boolean })
     completed: boolean;
 }
-
-// {
-//     "id": 1,
-//     "created": "2021-08-16",
-//     "title": "Intro to NestJS",
-//     "description": "This blog post is about NestJS",
-//     "completed": false
-// }

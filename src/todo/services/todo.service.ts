@@ -2,9 +2,9 @@ import { Injectable, Logger, NotFoundException, UnprocessableEntityException } f
 import { TodoModel } from '../models/todo.model';
 
 @Injectable()
-export class TodoService {
+export class TodoServiceImpl {
     private todos: Array<TodoModel> = [];
-    private readonly logger = new Logger(TodoService.name);
+    private readonly logger = new Logger(TodoServiceImpl.name);
 
     public findAll(): Array<TodoModel> {
         this.logger.log('Returning all todos');
@@ -15,7 +15,7 @@ export class TodoService {
     public findOne(id: number): TodoModel {
         this.logger.log(`Returning todo with id: ${id}`);
 
-        const todo: TodoModel = this.todos.find((todo) => todo.id === id);
+        const todo: TodoModel = this.todos.find((item) => item.id === id);
 
         if (!todo) {
             throw new NotFoundException('Todo not found.');
@@ -28,15 +28,14 @@ export class TodoService {
         this.logger.log(`Creating todo with title: ${todo.title}`);
 
         // if the title is already in use by another post
-        const titleExists: boolean = this.todos.some(
-            (item) => item.title === todo.title,
-        );
+        const titleExists: boolean = this.todos.some((item) => item.title === todo.title);
+
         if (titleExists) {
             throw new UnprocessableEntityException('Todo title already exists.');
         }
 
         // find the next id for a new blog post
-        const maxId: number = Math.max(...this.todos.map((todo) => todo.id), 0);
+        const maxId: number = Math.max(...this.todos.map((item) => item.id), 0);
         const id: number = maxId + 1;
 
         const blogTodo: TodoModel = {
@@ -52,7 +51,7 @@ export class TodoService {
     public delete(id: number): void {
         this.logger.log(`Deleting todo with id: ${id}`);
 
-        const index: number = this.todos.findIndex((post) => post.id === id);
+        const index: number = this.todos.findIndex((item) => item.id === id);
 
         // -1 is returned when no findIndex() match is found
         if (index === -1) {
@@ -65,7 +64,7 @@ export class TodoService {
     public update(id: number, todo: TodoModel): TodoModel {
         this.logger.log(`Updating todo with id: ${id}`);
 
-        const index: number = this.todos.findIndex((todo) => todo.id === id);
+        const index: number = this.todos.findIndex((item) => item.id === id);
 
         // -1 is returned when no findIndex() match is found
         if (index === -1) {
@@ -73,9 +72,8 @@ export class TodoService {
         }
 
         // if the title is already in use by another post
-        const titleExists: boolean = this.todos.some(
-            (item) => item.title === todo.title && item.id !== id,
-        );
+        const titleExists: boolean = this.todos.some((item) => item.title === todo.title && item.id !== id);
+
         if (titleExists) {
             throw new UnprocessableEntityException('Post title already exists.');
         }
